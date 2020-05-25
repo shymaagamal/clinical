@@ -40,9 +40,9 @@ class ApplicationWindow(QtWidgets.QMainWindow):
             if self.ui.dep_1.isChecked():
                 df = sql.read_sql('select * from dental',con)
             elif self.ui.dep_2.isChecked():
-                df = sql.read_sql('select * from radiology',con)
-            elif self.ui.dep_3.isChecked():
                 df = sql.read_sql('select * from earandnose',con)
+            elif self.ui.dep_3.isChecked():
+                df = sql.read_sql('select * from radiology',con)
             df.to_excel(self.PPMReportName[self.name])
         elif self.ui.comboBox.currentIndex() == 2:
             for i in range (self.ui.tableWidget_2.rowCount()-2, -1, -1):
@@ -73,12 +73,12 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         	self.df = sql.read_sql('select * from dental',con)
         elif self.ui.dep_2.isChecked():
         	self.name = 1
-        	mycursor.execute("SELECT * FROM radiology")
-        	self.df = sql.read_sql('select * from radiology',con)
-        elif self.ui.dep_3.isChecked():
-        	self.name = 2
         	mycursor.execute("SELECT * FROM earandnose")
         	self.df = sql.read_sql('select * from earandnose',con)
+        elif self.ui.dep_3.isChecked():
+        	self.name = 2
+        	mycursor.execute("SELECT * FROM radiology")
+        	self.df = sql.read_sql('select * from radiology',con)
         data = mycursor.fetchall()       
         self.ui.tableWidget.setRowCount(0)
         self.ui.tableWidget.insertRow(0)
